@@ -1,0 +1,42 @@
+// Each #kernel tells which function to compile; you can have many kernels
+#pragma kernel CSMain
+
+// Create a RenderTexture with enableRandomWrite flag and set it
+// with cs.SetTexture
+RWStructuredBuffer<float3> PositionResult;
+RWStructuredBuffer<float4> ColorResult;
+Texture2D<float4> DiffuseTexture;
+Texture2D<float4> DepthTexture;
+
+int width, height;
+
+float3 Texture2XYZ(uint3 id, float r)
+{
+    float PI = 3.14159265358979323846f;
+    float phi = (1 - id.x / (float) width) * 2 * PI - PI;
+    float theta = PI - id.y / (float) height * PI;
+    
+    
+    float x = r * sin(theta) * cos(phi);
+    float y = r * cos(theta);
+    float z = r * sin(theta) * sin(phi);
+    
+    return float3(x, y, z);
+
+}
+
+[numthreads(8, 8, 1)]
+void CSMain(uint3 id : SV_DispatchThreadID)
+{
+    // TODO: insert actual code here!
+    float r = DepthTexture[id.xy].x;
+    if (r < 0.01)
+        r = 0.01;
+    
+    PositionResult[id.x + id.y * width] = Texture2XYZ(id, 1/r*100);
+    ColorResult[id.x + id.y * width] = DiffuseTexture[id.xy];
+
+
+}
+
+
