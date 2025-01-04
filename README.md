@@ -1,3 +1,4 @@
+
 # LightEnvReconstruction
 概要
 
@@ -12,5 +13,19 @@
 
 方法
 
+[1]のIBS(Image Based Shading)をUnityに転用し,LightEnvReconstruction/CPURunEstimation.csにおいてLightEstimationというクラスを実装した。
+
+LightEstimationクラス:
+- LightEstimation.LightEstimation：コンストラクタ　　入力画像テクスチャ（LDRtex)を設定する。
+- LightEstimation.estimation(): 光源情報を推定する。
+- LightEstimation.ReconstructLights(): 推定された光源情報をもとにライトを作成する。
+
+
+光源推定[1]LightEstimation.estimation()の手順：
+1. 入力画像を以下の式でHDR画像に変換する。　LightEstimation.InverseToneMapping()
+2. HDR画像の輝度を計算。計算した輝度の、平均＋標準偏差＊２、を光源判断に使用する閾値に設定。LightEstimation.SetThresholdingLuminances()
+3. 幅優先探索で２.で計算した閾値以上のピクセルの連結部分を各光源として、画像ピクセル上にラベルを付ける。LightEstimation.BreathfirstSearch()
+4. 
+[1]Taehyun Rhee, Member, IEEE, Lohit Petikam, Benjamin Allen, and Andrew Chalmers,MR360: Mixed Reality Rendering for 360° Panoramic Videos,IEEE TRANSACTIONS ON VISUALIZATION AND COMPUTER GRAPHICS, VOL. 23, NO. 4, APRIL 2017
 
 
