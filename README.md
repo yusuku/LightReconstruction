@@ -6,6 +6,11 @@
 AIモデル　onnx :https://drive.google.com/file/d/1uSJOrfFhc8k-v_63j92YiKw50F6RlBQL/view?usp=drive_link
 ## 結果
 
+![スクリーンショット 2025-01-05 123058](https://github.com/user-attachments/assets/93f8df68-7123-4cc0-868a-4c460447c7f7)
+![スクリーンショット 2025-01-05 122644](https://github.com/user-attachments/assets/28eaf3aa-78ef-411a-b27f-b45486394122)
+![スクリーンショット 2025-01-05 122607](https://github.com/user-attachments/assets/bc113c5d-dda3-4c10-8dbb-93a3316b40f4)
+![スクリーンショット 2025-01-05 122920](https://github.com/user-attachments/assets/a7493828-5a37-4f77-9b74-8f4ee3c68a9b)
+
 
 # LightEnvReconstruction
 ## 概要
