@@ -22,8 +22,9 @@ AIモデル　onnx :https://drive.google.com/file/d/1uSJOrfFhc8k-v_63j92YiKw50F6
 ## 結果
 
 背景とパネルに乗せた３６０度画像から光源環境を再構築した。
-![image](https://github.com/user-attachments/assets/cfe2c8a8-03bc-4e9b-9236-2f2e160fdfc1)
-![image](https://github.com/user-attachments/assets/b90762e7-e305-46cd-a198-0c0e0346bc4f)
+|元画像と結果| 元画像と結果(別画像）|
+|---|---|
+|![image](https://github.com/user-attachments/assets/cfe2c8a8-03bc-4e9b-9236-2f2e160fdfc1)|![image](https://github.com/user-attachments/assets/b90762e7-e305-46cd-a198-0c0e0346bc4f)|
 
 
 ## 方法
