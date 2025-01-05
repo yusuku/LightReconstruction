@@ -27,8 +27,11 @@ LightEstimationクラス:
 3. 幅優先探索で２.で計算した閾値以上のピクセルの連結部分を各光源として、画像ピクセル上にラベルを付ける。LightEstimation.BreathfirstSearch()
 4. 各ピクセルの立体角、HDRピクセル値、輝度を用いて各ピクセルの放射照度（そのピクセルの立体角からどのくらいのエネルギーが目に入るか示す）を求める ：Irradiance。また3.で分けた各光源の放射照度を合計したものを配列Elsに格納する。：LightEstimation.IrradianceSetting()
 5. 3.で分けた各光源に対して、ピクセルの放射照度を重みとして、ピクセル位置の極座標の重みづけ平均を取り、その極座標を、各光源の方向とする。：LightEstimation.LightPosition()
+6. 最後に、各光源の放射照度のRGB値を光源色に、放射照度を放射輝度に変換したものを光源強度にあてる。最終的なLightEstimation.estimation()の出力は、光源極座標、色、強度　の３つになる
 
 
+光源環境の再構築LightEstimation.ReconstructLights()の手順:
+1. LightEstimation.estimation()で計算した光源強度が0.1以上の光源情報を、DirectionalLightのcolor , intensity, position に充てる。positionについて、LightEstimation.estimation()の出力では光源の極座標しか出ないので、３D座標系に変換したものをpositionに充てる。
 
 [1]Taehyun Rhee, Member, IEEE, Lohit Petikam, Benjamin Allen, and Andrew Chalmers,MR360: Mixed Reality Rendering for 360° Panoramic Videos,IEEE TRANSACTIONS ON VISUALIZATION AND COMPUTER GRAPHICS, VOL. 23, NO. 4, APRIL 2017
 
