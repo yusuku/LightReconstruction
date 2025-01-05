@@ -2,6 +2,8 @@
 ## 概要
 360度画像から、各ピクセルの深度を推定し、周辺環境の３Dシーンを再構築する。
 
+
+AIモデル　onnx :https://drive.google.com/file/d/1uSJOrfFhc8k-v_63j92YiKw50F6RlBQL/view?usp=drive_link
 ## 結果
 
 
