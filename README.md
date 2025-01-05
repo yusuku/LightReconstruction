@@ -33,6 +33,20 @@ LightEstimationクラス:
 光源環境の再構築LightEstimation.ReconstructLights()の手順:
 1. LightEstimation.estimation()で計算した光源強度が0.1以上の光源情報を、DirectionalLightのcolor , intensity, position に充てる。positionについて、LightEstimation.estimation()の出力では光源の極座標しか出ないので、３D座標系に変換したものをpositionに充てる。
 
+
+苦労した点、工夫した点：
+- [1]の論文を見つけてくるまでに、１０本ほど論文をよんで、自分の研究に何が必要かを考え、この論文に至った点。
+- [1]の論文で、研究に必要な部分を抽出し、コード化した点。
+- コード化では、できるだけ論文の記述順序に沿って、シンプルに関数を並べられるようにした点。
+- 最終的な出力結果のリアルタイム性を考慮し、計算負荷を小さくするために以下の点を工夫した点
+  - LightEstimation.InverseToneMapping()内でCompute Shaderを使用した。
+  - LightEstimation.ReconstructLights()内では、ライトを生成する回数を最小限にするために、LightEstimation.estimation()で計算された、光源の個数が増えた時にだけライトを生成し、そのほかの場合はただライトの情報を書き換えるようにしている。
+
+
+
+
+
+
 [1]Taehyun Rhee, Member, IEEE, Lohit Petikam, Benjamin Allen, and Andrew Chalmers,MR360: Mixed Reality Rendering for 360° Panoramic Videos,IEEE TRANSACTIONS ON VISUALIZATION AND COMPUTER GRAPHICS, VOL. 23, NO. 4, APRIL 2017
 
 
