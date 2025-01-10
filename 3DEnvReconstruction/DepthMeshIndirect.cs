@@ -29,7 +29,7 @@ public class DepthMeshIndirect : MonoBehaviour
         midas = new MidasEstimation(modelAsset,Debugmat);
         outputTexture= midas.inference(inputTexture);
         
-        GPUInstancing = new TextureDepthGPUInstancing(Instancematerial, Instancemesh, InstanceShader, inputTexture, outputTexture);
+        GPUInstancing = new TextureDepthGPUInstancing(Instancematerial, Instancemesh, InstanceShader, inputTexture);
 
     }
 
@@ -67,17 +67,16 @@ public class TextureDepthGPUInstancing
     private readonly uint xThread;
     private readonly uint yThread;
 
-    public TextureDepthGPUInstancing(Material material, Mesh mesh, ComputeShader computeShader, Texture diffuseMap,Texture Depthmap)
+    public TextureDepthGPUInstancing(Material material, Mesh mesh, ComputeShader computeShader, Texture diffuseMap)
     {
         this.material = material ;
         this.mesh = mesh;
         this.computeShader = computeShader;
         this.diffuseMap = diffuseMap;
-        this.Depthmap = Depthmap;
 
         this.width = diffuseMap.width;
         this.height = diffuseMap.height;
-
+        Debug.Log("widht: " + this.width);
         // コマンドバッファの初期化
         commandBuf = new GraphicsBuffer(GraphicsBuffer.Target.IndirectArguments, 1, GraphicsBuffer.IndirectDrawIndexedArgs.size);
         commandData = new GraphicsBuffer.IndirectDrawIndexedArgs[1]
@@ -100,11 +99,9 @@ public class TextureDepthGPUInstancing
         computeShader.SetInt("height", height);
         computeShader.GetKernelThreadGroupSizes(kernelId, out xThread, out yThread, out _);
         computeShader.SetTexture(kernelId, "DiffuseTexture", diffuseMap);
-        computeShader.SetTexture(kernelId, "DepthTexture", Depthmap);
         computeShader.SetBuffer(kernelId, "PositionResult", positionBuffer);
         computeShader.SetBuffer(kernelId, "ColorResult", colorBuffer);
-        computeShader.Dispatch(kernelId, Mathf.CeilToInt(width / (float)xThread), Mathf.CeilToInt(height / (float)yThread), 1);
-
+        
     }
 
     public void DrawMeshes(Texture depthmap)
